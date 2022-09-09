@@ -1,3 +1,1 @@
-let a;
-a = 4;
-alert(a);
+alert('Script is working');
