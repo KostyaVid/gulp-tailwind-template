@@ -32,13 +32,15 @@ const scripts = (cb) => {
     //'node_modules/jquery/dist/jquery.min.js',
     'src/script.js',
   ])
+    .pipe(sourcemaps.init())
     .pipe(
       babel({
         presets: ['@babel/env'],
       }),
     )
-    .pipe(concat('script.min.js'))
     .pipe(uglify())
+    .pipe(concat('script.min.js'))    
+    .pipe(sourcemaps.write('.'))
     .pipe(dest('src/scripts/'))
     .pipe(browserSync.stream());
   cb();
