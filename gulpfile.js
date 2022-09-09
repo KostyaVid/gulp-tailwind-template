@@ -2,16 +2,16 @@ const { task, src, dest, series, watch } = require('gulp');
 
 const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
-var autoprefixer = require('autoprefixer');
+const autoprefixer = require('autoprefixer');
 const postcssPresetEnv = require('postcss-preset-env');
-var cssnano = require('cssnano');
-var tailwind = require('tailwindcss');
+const cssnano = require('cssnano');
+const tailwind = require('tailwindcss');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify-es').default;
 const babel = require('gulp-babel');
 const imagecomp = require('compress-images');
 // const fileinclude = require('gulp-file-include');
-var browserSync = require('browser-sync').create();
+const browserSync = require('browser-sync').create();
 
 // const html = (cb) => {
 //   src(['indexBundle.html'])
@@ -45,7 +45,7 @@ const scripts = (cb) => {
 
 const css = (cb) => {
   var plugins = [
-    tailwind('./tailwind.config.js'),
+    tailwind(),
     autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true }),
     require('postcss-nested'),
     cssnano(),
