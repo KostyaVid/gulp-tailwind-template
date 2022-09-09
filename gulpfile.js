@@ -1,4 +1,4 @@
-const { task, src, dest, series, watch } = require('gulp');
+const { task, src, dest, series, watch, parallel } = require('gulp');
 
 const postcss = require('gulp-postcss');
 const sourcemaps = require('gulp-sourcemaps');
@@ -10,6 +10,7 @@ const concat = require('gulp-concat');
 const uglify = require('gulp-uglify-es').default;
 const babel = require('gulp-babel');
 const imagecomp = require('compress-images');
+const del = require('del');
 // const fileinclude = require('gulp-file-include');
 const browserSync = require('browser-sync').create();
 
@@ -85,6 +86,14 @@ function browsersyncServe(cb) {
   cb();
 }
 
+function cleanImg() {
+  return del('src/images/dest/**/*', { force: true }); // Удаляем все содержимое папки "app/images/dest/"
+}
+
+function cleanDist() {
+  return del('dist/**/*', { force: true }); // Удаляем все содержимое папки "dist/"
+}
+
 function watchTask() {
   watch(['src/**/*.js', '!src/**/*.min.js'], scripts);
   watch(['src/**/' + 'css' + '/**/*', , '!src/**/*.min.css'], css);
@@ -97,8 +106,10 @@ function build() {
     base: 'src',
   }).pipe(dest('dist'));
 }
-exports.build = series(scripts, css, images, build);
-exports.default = series(css, scripts, images, browsersyncServe, watchTask);
+exports.build = series(cleanDist, scripts, css, images, build);
+exports.default = parallel(css, scripts, images, browsersyncServe, watchTask);
 exports.css = css;
 exports.scripts = scripts;
 exports.images = images;
+exports.cleanimg = cleanImg;
+exports.cleandist = cleanDist;
