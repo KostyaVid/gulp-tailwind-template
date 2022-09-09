@@ -97,9 +97,9 @@ function cleanDist() {
 }
 
 function watchTask() {
-  watch(['src/**/*.js', '!src/**/*.min.js'], scripts);
-  watch(['src/**/' + 'css' + '/**/*', , '!src/**/*.min.css'], css);
-  watch('src/**/*.html').on('change', browserSync.reload);
+  watch(['src/**/*.js', '!src/**/*.min.js', '!src/**/*.min.js.map'], scripts);
+  watch(['src/**/' + 'css' + '/**/*', , '!src/**/*.min.css', '!src/**/*.min.css.map'], css);
+  watch('src/**/*.html', css).on('change', browserSync.reload);
   watch('src/images/src/**/*', images);
 }
 
