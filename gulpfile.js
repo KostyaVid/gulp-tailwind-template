@@ -89,16 +89,16 @@ function browsersyncServe(cb) {
 }
 
 function cleanImg() {
-  return del('src/images/dest/**/*', { force: true }); // Удаляем все содержимое папки "app/images/dest/"
+  return del('src/images/dest/**/*', { force: true });
 }
 
 function cleanDist() {
-  return del('dist/**/*', { force: true }); // Удаляем все содержимое папки "dist/"
+  return del('dist/**/*', { force: true });
 }
 
 function watchTask() {
   watch(['src/**/*.js', '!src/**/*.min.js', '!src/**/*.min.js.map'], scripts);
-  watch(['src/**/' + 'css' + '/**/*', , '!src/**/*.min.css', '!src/**/*.min.css.map'], css);
+  watch(['src/**/' + 'css' + '/**/*', '!src/**/*.min.css', '!src/**/*.min.css.map'], css);
   watch('src/**/*.html', css).on('change', browserSync.reload);
   watch('src/images/src/**/*', images);
 }
