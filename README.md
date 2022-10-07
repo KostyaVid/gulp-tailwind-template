@@ -3,7 +3,9 @@ Template gulp + tailwind
 
 ## Install
 
+```bash
 npm install
+```
 
 ## Start
 1. Your files css, js, html  is in folder 'src'.
